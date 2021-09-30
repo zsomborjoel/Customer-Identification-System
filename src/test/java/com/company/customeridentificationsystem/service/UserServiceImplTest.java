@@ -3,7 +3,7 @@ package com.company.customeridentificationsystem.service;
 import com.company.customeridentificationsystem.model.response.UserCheckSystemResponse;
 import com.company.customeridentificationsystem.client.UserCheckSystemClient;
 import com.company.customeridentificationsystem.mapper.UserInfoDtoMapper;
-import com.company.customeridentificationsystem.model.User;
+import com.company.customeridentificationsystem.model.dao.User;
 import com.company.customeridentificationsystem.repository.ExecutionStatusRepository;
 import com.company.customeridentificationsystem.repository.UserRepository;
 import org.junit.Test;

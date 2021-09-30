@@ -1,7 +1,7 @@
 package com.company.customeridentificationsystem.mapper;
 
 import com.company.customeridentificationsystem.exception.FileUploadException;
-import com.company.customeridentificationsystem.model.UserDocument;
+import com.company.customeridentificationsystem.model.dao.UserDocument;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 

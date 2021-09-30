@@ -1,7 +1,7 @@
 package com.company.customeridentificationsystem.service;
 
 import com.company.customeridentificationsystem.repository.ExecutionStatusRepository;
-import com.company.customeridentificationsystem.model.ExecutionStatus;
+import com.company.customeridentificationsystem.model.dao.ExecutionStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -10,7 +10,7 @@ import com.company.customeridentificationsystem.repository.UserRepository;
 import com.company.customeridentificationsystem.client.PictureValiditySystemClient;
 import com.company.customeridentificationsystem.mapper.UserDocumentDtoMapper;
 import com.company.customeridentificationsystem.mapper.UserDocumentMapper;
-import com.company.customeridentificationsystem.model.ExecutionStatus;
+import com.company.customeridentificationsystem.model.dao.ExecutionStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;

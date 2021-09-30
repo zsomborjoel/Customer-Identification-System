@@ -1,6 +1,6 @@
 package com.company.customeridentificationsystem.repository;
 
-import com.company.customeridentificationsystem.model.ExecutionStatus;
+import com.company.customeridentificationsystem.model.dao.ExecutionStatus;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;

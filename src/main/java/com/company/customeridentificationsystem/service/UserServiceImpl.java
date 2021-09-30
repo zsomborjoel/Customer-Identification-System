@@ -6,8 +6,8 @@ import com.company.customeridentificationsystem.repository.ExecutionStatusReposi
 import com.company.customeridentificationsystem.repository.UserRepository;
 import com.company.customeridentificationsystem.client.UserCheckSystemClient;
 import com.company.customeridentificationsystem.mapper.UserInfoDtoMapper;
-import com.company.customeridentificationsystem.model.ExecutionStatus;
-import com.company.customeridentificationsystem.model.User;
+import com.company.customeridentificationsystem.model.dao.ExecutionStatus;
+import com.company.customeridentificationsystem.model.dao.User;
 import org.apache.commons.lang3.BooleanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

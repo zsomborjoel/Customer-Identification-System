@@ -2,7 +2,7 @@ package com.company.customeridentificationsystem.testhelper;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.company.customeridentificationsystem.model.User;
+import com.company.customeridentificationsystem.model.dao.User;
 
 public class UserHelper {
 

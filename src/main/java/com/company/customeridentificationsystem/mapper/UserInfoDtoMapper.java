@@ -1,7 +1,7 @@
 package com.company.customeridentificationsystem.mapper;
 
 import com.company.customeridentificationsystem.model.dto.UserInfoDto;
-import com.company.customeridentificationsystem.model.User;
+import com.company.customeridentificationsystem.model.dao.User;
 import org.springframework.stereotype.Component;
 
 import java.util.function.Function;

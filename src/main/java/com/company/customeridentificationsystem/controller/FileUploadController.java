@@ -1,7 +1,7 @@
 package com.company.customeridentificationsystem.controller;
 
 import com.company.customeridentificationsystem.exception.FileUploadException;
-import com.company.customeridentificationsystem.model.User;
+import com.company.customeridentificationsystem.model.dao.User;
 import com.company.customeridentificationsystem.service.UserDocumentService;
 import com.company.customeridentificationsystem.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -23,7 +23,7 @@ import static com.company.customeridentificationsystem.util.UserDocumentUtils.ha
 
 @Slf4j
 @Controller
-@RequestMapping("/document")
+@RequestMapping("api/document")
 public class FileUploadController {
 
     @Autowired

@@ -1,6 +1,6 @@
 package com.company.customeridentificationsystem.service;
 
-import com.company.customeridentificationsystem.model.User;
+import com.company.customeridentificationsystem.model.dao.User;
 
 public interface UserService {
 
