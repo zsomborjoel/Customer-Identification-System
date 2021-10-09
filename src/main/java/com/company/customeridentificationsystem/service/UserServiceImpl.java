@@ -1,15 +1,15 @@
 package com.company.customeridentificationsystem.service;
 
-import com.company.customeridentificationsystem.exception.UserAuthenticationException;
-import com.company.customeridentificationsystem.model.response.UserCheckSystemResponse;
-import com.company.customeridentificationsystem.repository.ExecutionStatusRepository;
-import com.company.customeridentificationsystem.repository.UserRepository;
 import com.company.customeridentificationsystem.client.UserCheckSystemClient;
+import com.company.customeridentificationsystem.exception.UserAuthenticationException;
 import com.company.customeridentificationsystem.mapper.UserInfoDtoMapper;
 import com.company.customeridentificationsystem.model.dao.ExecutionStatus;
 import com.company.customeridentificationsystem.model.dao.User;
+import com.company.customeridentificationsystem.model.response.UserCheckSystemResponse;
+import com.company.customeridentificationsystem.repository.ExecutionStatusRepository;
+import com.company.customeridentificationsystem.repository.UserRepository;
+import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.BooleanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,19 +20,13 @@ import static com.company.customeridentificationsystem.constant.ExecutionStatusC
 
 @Service
 @Transactional
+@RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 
-    @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
-    private ExecutionStatusRepository executionStatusRepository;
-
-    @Autowired
-    private UserCheckSystemClient userCheckSystemClient;
-
-    @Autowired
-    private UserInfoDtoMapper userInfoDtoMapper;
+    private final UserRepository userRepository;
+    private final ExecutionStatusRepository executionStatusRepository;
+    private final UserCheckSystemClient userCheckSystemClient;
+    private final UserInfoDtoMapper userInfoDtoMapper;
 
     @Override
     public User getUserByDocumentId(String documentId) {

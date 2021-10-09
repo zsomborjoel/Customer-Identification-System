@@ -1,15 +1,15 @@
 package com.company.customeridentificationsystem.service;
 
-import com.company.customeridentificationsystem.repository.ExecutionStatusRepository;
 import com.company.customeridentificationsystem.model.dao.ExecutionStatus;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.company.customeridentificationsystem.repository.ExecutionStatusRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor
 public class ExecutionStatusServiceImpl implements ExecutionStatusService {
 
-    @Autowired
-    private ExecutionStatusRepository executionStatusRepository;
+    private final ExecutionStatusRepository executionStatusRepository;
 
     /**
      * After user authentication start the execution status will be visible.

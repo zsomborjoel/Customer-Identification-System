@@ -1,17 +1,16 @@
 package com.company.customeridentificationsystem.service;
 
+import com.company.customeridentificationsystem.client.PictureValiditySystemClient;
 import com.company.customeridentificationsystem.constant.ExecutionStatusConstants;
 import com.company.customeridentificationsystem.exception.FileUploadException;
+import com.company.customeridentificationsystem.mapper.UserDocumentDtoMapper;
+import com.company.customeridentificationsystem.mapper.UserDocumentMapper;
+import com.company.customeridentificationsystem.model.dao.ExecutionStatus;
 import com.company.customeridentificationsystem.model.properties.UserAuthProperties;
 import com.company.customeridentificationsystem.model.response.PictureValiditySystemResponse;
 import com.company.customeridentificationsystem.repository.ExecutionStatusRepository;
 import com.company.customeridentificationsystem.repository.UserDocumentRepository;
-import com.company.customeridentificationsystem.repository.UserRepository;
-import com.company.customeridentificationsystem.client.PictureValiditySystemClient;
-import com.company.customeridentificationsystem.mapper.UserDocumentDtoMapper;
-import com.company.customeridentificationsystem.mapper.UserDocumentMapper;
-import com.company.customeridentificationsystem.model.dao.ExecutionStatus;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -23,28 +22,15 @@ import java.util.concurrent.TimeoutException;
 import static com.company.customeridentificationsystem.util.UserDocumentUtils.isNotMatching;
 
 @Service
+@RequiredArgsConstructor
 public class UserDocumentServiceImpl implements UserDocumentService {
 
-    @Autowired
-    private UserDocumentRepository userDocumentRepository;
-
-    @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
-    private UserDocumentMapper userDocumentMapper;
-
-    @Autowired
-    private UserDocumentDtoMapper userDocumentDtoMapper;
-
-    @Autowired
-    private PictureValiditySystemClient pictureValiditySystemClient;
-
-    @Autowired
-    private ExecutionStatusRepository executionStatusRepository;
-
-    @Autowired
-    private UserAuthProperties userAuthProperties;
+    private final UserDocumentRepository userDocumentRepository;
+    private final UserDocumentMapper userDocumentMapper;
+    private final UserDocumentDtoMapper userDocumentDtoMapper;
+    private final PictureValiditySystemClient pictureValiditySystemClient;
+    private final ExecutionStatusRepository executionStatusRepository;
+    private final UserAuthProperties userAuthProperties;
 
     /**
      * Upload necessary document and follow execution statuses
