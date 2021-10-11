@@ -1,5 +1,7 @@
 package com.company.customeridentificationsystem.security;
 
+import com.company.customeridentificationsystem.model.dao.User;
+import com.company.customeridentificationsystem.model.dao.UserPrincipal;
 import com.company.customeridentificationsystem.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
@@ -16,8 +18,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Optional;
 
-import static java.util.Optional.ofNullable;
 import static org.apache.commons.lang3.StringUtils.isEmpty;
 
 @Component
@@ -43,14 +45,15 @@ public class JwtTokenFilter extends OncePerRequestFilter {
             return;
         }
 
-        UserDetails userDetails = userRepository
+        User user = userRepository
                 .findByUsername(jwtTokenUtil.getUsername(token))
                 .orElse(null);
+        UserDetails userDetails = new UserPrincipal(user);
 
         UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
                 userDetails,
                 null,
-                ofNullable(userDetails)
+                Optional.of(userDetails)
                         .map(UserDetails::getAuthorities)
                         .orElse(new ArrayList<>())
         );
