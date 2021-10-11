@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
 
 @SpringBootApplication
-@ConfigurationPropertiesScan("com.goodid.customeridentificationsystem.model.properties")
+@ConfigurationPropertiesScan("com.company.customeridentificationsystem.model.properties")
 public class CustomerIdentificationSystemApplication {
 
 	public static void main(String[] args) {

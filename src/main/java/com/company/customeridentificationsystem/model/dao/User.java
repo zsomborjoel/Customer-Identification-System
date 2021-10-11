@@ -52,6 +52,7 @@ public class User implements UserDetails {
 
     private String password;
 
+    @Transient
     private Collection<? extends GrantedAuthority> authorities;
 
     @Override

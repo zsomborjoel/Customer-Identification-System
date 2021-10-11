@@ -1,6 +1,7 @@
 package com.company.customeridentificationsystem.controller;
 
 import com.company.customeridentificationsystem.model.dao.User;
+import com.company.customeridentificationsystem.security.JwtTokenUtil;
 import com.company.customeridentificationsystem.service.ExecutionStatusService;
 import com.company.customeridentificationsystem.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -11,6 +12,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,6 +29,7 @@ public class UserAuthenticationController {
 
     private UserService userService;
     private ExecutionStatusService executionStatusService;
+    private JwtTokenUtil jwtTokenUtil;
 
     @Operation(summary = "Start user auth")
     @ApiResponses(value = {
@@ -42,7 +45,9 @@ public class UserAuthenticationController {
 
         try {
             userService.startAuth(user);
-            return ResponseEntity.accepted().build();
+            return ResponseEntity.accepted()
+                    .header(HttpHeaders.AUTHORIZATION, jwtTokenUtil.generateAccessToken(user))
+                    .build();
         } catch (Exception e) {
             log.error("Exception occurred in user auth: ", e);
             return ResponseEntity.internalServerError().body(e);

@@ -3,7 +3,6 @@ package com.company.customeridentificationsystem.security;
 import com.company.customeridentificationsystem.exception.UserNotExistsException;
 import com.company.customeridentificationsystem.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.catalina.filters.CorsFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -18,6 +17,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.CorsFilter;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -33,12 +33,11 @@ import static java.lang.String.format;
 )
 public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
     public ApplicationSecurityConfig(UserRepository userRepository) {
         super();
         this.userRepository = userRepository;
-
     }
 
     @Override
@@ -84,8 +83,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
         config.addAllowedHeader("*");
         config.addAllowedMethod("*");
         source.registerCorsConfiguration("/**", config);
-        return new CorsFilter();
-
+        return new CorsFilter(source);
     }
 
     @Bean
