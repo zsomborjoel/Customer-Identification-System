@@ -2,7 +2,7 @@ package com.company.customeridentificationsystem.service;
 
 import com.company.customeridentificationsystem.model.response.UserCheckSystemResponse;
 import com.company.customeridentificationsystem.client.UserCheckSystemClient;
-import com.company.customeridentificationsystem.mapper.UserInfoDtoMapper;
+import com.company.customeridentificationsystem.mapper.UserInfoRequestMapper;
 import com.company.customeridentificationsystem.model.dao.User;
 import com.company.customeridentificationsystem.repository.ExecutionStatusRepository;
 import com.company.customeridentificationsystem.repository.UserRepository;
@@ -21,10 +21,10 @@ import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
-public class UserServiceImplTest {
+public class UserServiceTest {
 
     @InjectMocks
-    private UserServiceImpl userService;
+    private UserService userService;
 
     @Mock
     private UserRepository userRepository;
@@ -36,7 +36,7 @@ public class UserServiceImplTest {
     private UserCheckSystemClient userCheckSystemClient;
 
     @Mock
-    private UserInfoDtoMapper userInfoDtoMapper;
+    private UserInfoRequestMapper userInfoRequestMapper;
 
     @Test
     public void shouldValidateUser() {

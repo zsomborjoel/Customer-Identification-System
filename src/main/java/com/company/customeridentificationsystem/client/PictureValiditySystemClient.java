@@ -1,6 +1,6 @@
 package com.company.customeridentificationsystem.client;
 
-import com.company.customeridentificationsystem.model.dto.UserDocumentDto;
+import com.company.customeridentificationsystem.model.dto.UserDocumentRequest;
 import com.company.customeridentificationsystem.model.properties.PictureValiditySystemProperties;
 import com.company.customeridentificationsystem.model.response.PictureValiditySystemResponse;
 import lombok.extern.slf4j.Slf4j;
@@ -23,10 +23,10 @@ public class PictureValiditySystemClient {
     @Autowired
     private PictureValiditySystemProperties properties;
 
-    public ResponseEntity<PictureValiditySystemResponse> getPictureValiditySystemResponse(UserDocumentDto userDocument) throws RestClientException {
+    public ResponseEntity<PictureValiditySystemResponse> getPictureValiditySystemResponse(UserDocumentRequest userDocument) throws RestClientException {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.MULTIPART_FORM_DATA);
-        HttpEntity<UserDocumentDto> request = new HttpEntity<>(userDocument, headers);
+        HttpEntity<UserDocumentRequest> request = new HttpEntity<>(userDocument, headers);
         return restTemplate.postForEntity(properties.getUrl(), request, PictureValiditySystemResponse.class);
     }
 

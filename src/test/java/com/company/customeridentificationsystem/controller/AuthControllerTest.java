@@ -1,9 +1,9 @@
 package com.company.customeridentificationsystem.controller;
 
 import com.company.customeridentificationsystem.model.properties.SecurityProperties;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.company.customeridentificationsystem.service.ExecutionStatusService;
 import com.company.customeridentificationsystem.testhelper.UserHelper;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -33,7 +33,7 @@ import static org.springframework.security.test.web.servlet.setup.SecurityMockMv
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK)
-public class UserAuthenticationControllerTest {
+public class AuthControllerTest {
 
     private MockMvc mockMvc;
 
@@ -45,15 +45,13 @@ public class UserAuthenticationControllerTest {
     @MockBean
     private ExecutionStatusService executionStatusService;
 
-    private ObjectMapper objectMapper;
-
     @Before
     public void setup() {
         mockMvc = MockMvcBuilders.webAppContextSetup(context)
                 .apply(springSecurity())
                 .build();
 
-        objectMapper = new ObjectMapper();
+        ObjectMapper objectMapper = new ObjectMapper();
         userHelper = new UserHelper(objectMapper);
 
         SecurityProperties securityProperties = Mockito.mock(SecurityProperties.class);

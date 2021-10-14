@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.validation.ValidationException;
 import java.util.concurrent.TimeoutException;
 
 @Slf4j
@@ -27,11 +28,11 @@ public class UserFacadeService {
         log.info("File upload was success for {}", documentId);
 
         if (!userDocumentService.isValidDocuments(files)) {
-            throw new FileUploadException("Files are not valid by third party service");
+            throw new ValidationException("Files are not valid by third party service");
         }
 
         if (!userService.isValidUser(user)) {
-            throw new FileUploadException("The inserted user details are not correct");
+            throw new ValidationException("The inserted user details are not correct");
         }
     }
 

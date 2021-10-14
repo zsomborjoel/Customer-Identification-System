@@ -1,6 +1,6 @@
 package com.company.customeridentificationsystem.client;
 
-import com.company.customeridentificationsystem.model.dto.UserDocumentDto;
+import com.company.customeridentificationsystem.model.dto.UserDocumentRequest;
 import com.company.customeridentificationsystem.model.properties.PictureValiditySystemProperties;
 import com.company.customeridentificationsystem.model.response.PictureValiditySystemResponse;
 import org.junit.Test;
@@ -33,11 +33,11 @@ public class PictureValiditySystemClientTest{
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.MULTIPART_FORM_DATA);
-        HttpEntity<UserDocumentDto> request = new HttpEntity<>(new UserDocumentDto(), headers);
+        HttpEntity<UserDocumentRequest> request = new HttpEntity<>(new UserDocumentRequest(), headers);
 
         when(properties.getUrl()).thenReturn("http:");
         when(restTemplate.postForEntity("http:", request, PictureValiditySystemResponse.class)).thenReturn(new ResponseEntity<>(pictureValiditySystemResponse, HttpStatus.OK));
-        assertEquals(HttpStatus.OK, pictureValiditySystemClient.getPictureValiditySystemResponse(new UserDocumentDto()).getStatusCode());
+        assertEquals(HttpStatus.OK, pictureValiditySystemClient.getPictureValiditySystemResponse(new UserDocumentRequest()).getStatusCode());
     }
 
 }

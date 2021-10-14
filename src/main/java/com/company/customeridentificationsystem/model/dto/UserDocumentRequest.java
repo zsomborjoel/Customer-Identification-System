@@ -8,7 +8,7 @@ import org.springframework.web.multipart.MultipartFile;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserDocumentDto {
+public class UserDocumentRequest {
 
     private MultipartFile documentPicture;
     private MultipartFile cameraPicture;

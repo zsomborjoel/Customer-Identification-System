@@ -1,6 +1,5 @@
 package com.company.customeridentificationsystem.security;
 
-import com.company.customeridentificationsystem.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
@@ -35,7 +34,6 @@ import javax.sql.DataSource;
 @RequiredArgsConstructor
 public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private final UserRepository userRepository;
     private final UserDetailsService userDetailsService;
     private final DataSource dataSource;
 
@@ -57,6 +55,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and();
 
         http.authorizeRequests()
+                .antMatchers("/").permitAll()
                 .antMatchers("/api/public/**").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/document/uploadFiles/**").permitAll()
                 .anyRequest().authenticated();

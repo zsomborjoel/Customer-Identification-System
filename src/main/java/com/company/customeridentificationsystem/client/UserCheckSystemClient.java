@@ -1,6 +1,6 @@
 package com.company.customeridentificationsystem.client;
 
-import com.company.customeridentificationsystem.model.dto.UserInfoDto;
+import com.company.customeridentificationsystem.model.dto.UserInfoRequest;
 import com.company.customeridentificationsystem.model.properties.UserCheckSystemProperties;
 import com.company.customeridentificationsystem.model.response.UserCheckSystemResponse;
 import lombok.extern.slf4j.Slf4j;
@@ -23,10 +23,10 @@ public class UserCheckSystemClient {
     @Autowired
     private UserCheckSystemProperties properties;
 
-    public ResponseEntity<UserCheckSystemResponse> getUserCheckSystemResponse(UserInfoDto userInfo) throws RestClientException {
+    public ResponseEntity<UserCheckSystemResponse> getUserCheckSystemResponse(UserInfoRequest userInfo) throws RestClientException {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
-        HttpEntity<UserInfoDto> request = new HttpEntity<>(userInfo, headers);
+        HttpEntity<UserInfoRequest> request = new HttpEntity<>(userInfo, headers);
         return restTemplate.postForEntity(properties.getUrl(), request, UserCheckSystemResponse.class);
     }
 
