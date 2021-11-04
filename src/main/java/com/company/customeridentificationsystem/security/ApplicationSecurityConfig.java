@@ -66,9 +66,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
         auth.userDetailsService(userDetailsService)
                 .passwordEncoder(passwordEncoder())
                 .and()
-                .authenticationProvider(authenticationProvider())
-                .jdbcAuthentication()
-                .dataSource(dataSource);
+                .authenticationProvider(authenticationProvider());
     }
 
     @Bean

@@ -5,9 +5,11 @@ import com.company.customeridentificationsystem.model.dao.User;
 import com.company.customeridentificationsystem.repository.UserRepository;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.ApplicationListener;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.stream.IntStream;
 
 import static java.util.Arrays.asList;
 
@@ -30,7 +32,7 @@ public class DatabaseInitializer implements ApplicationListener<ApplicationReady
             "Ritchie"
     );
 
-    private final String password = "Test12345_";
+    private final String password = "Test12345";
 
     private final UserRepository userRepository;
 
@@ -41,16 +43,15 @@ public class DatabaseInitializer implements ApplicationListener<ApplicationReady
     @SuppressWarnings("NullableProblems")
     @Override
     public void onApplicationEvent(ApplicationReadyEvent applicationReadyEvent) {
-        for (int i = 0; i < usernames.size(); ++i) {
-            User user = User.builder()
-                    .username(usernames.get(i))
-                    .firstName(firstNames.get(i))
-                    .lastName(lastNames.get(i))
-                    .password(password)
-                    .build();
-
-            userRepository.save(user);
-        }
+        IntStream.range(0, usernames.size())
+                .mapToObj(i -> User.builder()
+                                .username(usernames.get(i))
+                                .firstName(firstNames.get(i))
+                                .lastName(lastNames.get(i))
+                                .password(new BCryptPasswordEncoder(11).encode(password))
+                                .build())
+                .filter(e -> !userRepository.findByUsername(e.getUsername()).isPresent())
+                .forEach(userRepository::save);
     }
 
 }

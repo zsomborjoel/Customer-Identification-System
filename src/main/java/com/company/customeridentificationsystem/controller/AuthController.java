@@ -2,6 +2,7 @@ package com.company.customeridentificationsystem.controller;
 
 import com.company.customeridentificationsystem.mapper.UserViewMapper;
 import com.company.customeridentificationsystem.model.dao.User;
+import com.company.customeridentificationsystem.model.dao.UserPrincipal;
 import com.company.customeridentificationsystem.model.dto.AuthUserRequest;
 import com.company.customeridentificationsystem.model.dto.StatusRequest;
 import com.company.customeridentificationsystem.model.dto.UserView;
@@ -50,11 +51,11 @@ public class AuthController {
             Authentication authenticate = authenticationManager
                     .authenticate(new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword()));
 
-            User user = (User) authenticate.getPrincipal();
+            UserPrincipal userPrincipal = (UserPrincipal) authenticate.getPrincipal();
 
             return ResponseEntity.ok()
-                    .header(HttpHeaders.AUTHORIZATION, jwtTokenUtil.generateAccessToken(user))
-                    .body(userViewMapper.apply(user));
+                    .header(HttpHeaders.AUTHORIZATION, jwtTokenUtil.generateAccessToken(userPrincipal.getUser()))
+                    .body(userViewMapper.apply(userPrincipal.getUser()));
         } catch (BadCredentialsException ex) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
