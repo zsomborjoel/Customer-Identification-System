@@ -1,6 +1,7 @@
 package com.company.customeridentificationsystem.controller;
 
 import com.company.customeridentificationsystem.mapper.UserViewMapper;
+import com.company.customeridentificationsystem.model.dao.Role;
 import com.company.customeridentificationsystem.model.dao.User;
 import com.company.customeridentificationsystem.model.dao.UserPrincipal;
 import com.company.customeridentificationsystem.model.dto.AuthUserRequest;
@@ -30,6 +31,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.annotation.security.RolesAllowed;
 import javax.validation.Valid;
 
 @Tag(name = "Authentication")
@@ -45,6 +47,13 @@ public class AuthController {
     private final UserViewMapper userViewMapper;
     private final AuthenticationManager authenticationManager;
 
+    @Operation(summary = "Start user auth")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "User authentication started successfully",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = UserView.class)) }),
+            @ApiResponse(responseCode = "500", description = "Unexpected exception occurred")
+    })
     @PostMapping("login")
     public ResponseEntity<UserView> login(@RequestBody @Valid AuthUserRequest request) {
         try {
@@ -61,24 +70,13 @@ public class AuthController {
         }
     }
 
-    @Operation(summary = "Start user auth")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "User authentication started successfully",
-                    content = { @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = UserView.class)) }),
-            @ApiResponse(responseCode = "500", description = "Unexpected exception occurred")
-    })
-    @PostMapping("auth")
-    public UserView startUserAuth(@RequestBody @Valid AuthUserRequest request) {
-        return userService.startAuth(request);
-    }
-
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody AuthUserRequest authUserRequest) {
         log.debug("Entering register endpoint");
 
         try {
-            //userService.startAuth(createUserRequest);
+            userService.startAuth(authUserRequest);
+
             return ResponseEntity.accepted()
                     .header(HttpHeaders.AUTHORIZATION)
                     .build();
@@ -95,6 +93,7 @@ public class AuthController {
                             schema = @Schema(implementation = User.class)) }),
             @ApiResponse(responseCode = "500", description = "Unexpected exception occurred")
     })
+    @RolesAllowed(Role.STATUS_ADMIN)
     @GetMapping("/status")
     public ResponseEntity<?> getStatus(@RequestBody @Valid StatusRequest statusRequest) {
         log.debug("Status been requested");

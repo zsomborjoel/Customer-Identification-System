@@ -35,7 +35,4 @@ public class AuthUserRequest {
     private String rePassword;
     private Set<String> authorities;
 
-
-
-
 }
